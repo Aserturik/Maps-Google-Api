@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lineas</title>
+
+<head>
+  <title>Navigation Functions (Heading)</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  
+
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script type="module" src="./index.js"></script>
+</head> 
+
+<body>
+  <div id="map"></div>
+  <div id="floating-panel">
+    Origin: <input type="text" readonly id="origin" /> Destination:
+    <input type="text" readonly id="destination" /><br />
+    Heading: <input type="text" readonly id="heading" /> degrees
+  </div>
+
+  <!-- 
+      The `defer` attribute causes the callback to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across browsers, consider loading using Promises.
+      See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
+      for more information.
+      -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiKnExLsUSk2XOWzYJWUrYbNxE8ZceAHE&callback=initMap&libraries=geometry&v=weekly"defer>
+  </script>
+</body>
+
+</html>

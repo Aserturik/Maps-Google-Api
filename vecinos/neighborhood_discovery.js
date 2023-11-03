@@ -70,10 +70,10 @@ function parseDaysHours(openingHours) {
 }
 
 /** Number of POIs to show on widget load. */
-const ND_NUM_PLACES_INITIAL = 5;
+const ND_NUM_PLACES_INITIAL = 25;
 
 /** Number of additional POIs to show when 'Show More' button is clicked. */
-const ND_NUM_PLACES_SHOW_MORE = 5;
+const ND_NUM_PLACES_SHOW_MORE = 25;
 
 /** Maximum number of place photos to show on the details panel. */
 const ND_NUM_PLACE_PHOTOS_MAX = 6;
@@ -182,7 +182,7 @@ function NeighborhoodDiscovery(configuration) {
     // Add marker at the center location (if specified).
     if (configuration.centerMarker && configuration.centerMarker.icon) {
       drawMarker('Home', widget.center,
-                 '#1A73E8', '#185ABC', configuration.centerMarker.icon);
+                '#1A73E8', '#185ABC', configuration.centerMarker.icon);
     }
 
     // Add marker for the specified Place object.
@@ -546,4 +546,73 @@ function NeighborhoodDiscovery(configuration) {
       });
     };
   }
+
+  // This example requires the Geometry library. Include the libraries=geometry
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=geometry">
+let marker1, marker2;
+let poly, geodesicPoly;
+
+function initMap() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 4,
+    center: { lat: 34, lng: -40.605 },
+  });
+
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+    document.getElementById("info"),
+  );
+  marker1 = new google.maps.Marker({
+    map,
+    draggable: true,
+    position: { lat: 40.714, lng: -74.006 },
+  });
+  marker2 = new google.maps.Marker({
+    map,
+    draggable: true,
+    position: { lat: 48.857, lng: 2.352 },
+  });
+
+  const bounds = new google.maps.LatLngBounds(
+    marker1.getPosition(),
+    marker2.getPosition(),
+  );
+
+  map.fitBounds(bounds);
+  google.maps.event.addListener(marker1, "position_changed", update);
+  google.maps.event.addListener(marker2, "position_changed", update);
+  poly = new google.maps.Polyline({
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 3,
+    map: map,
+  });
+  geodesicPoly = new google.maps.Polyline({
+    strokeColor: "#CC0099",
+    strokeOpacity: 1.0,
+    strokeWeight: 3,
+    geodesic: true,
+    map: map,
+  });
+  update();
+}
+
+function update() {
+  const path = [marker1.getPosition(), marker2.getPosition()];
+
+  poly.setPath(path);
+  geodesicPoly.setPath(path);
+
+  const heading = google.maps.geometry.spherical.computeHeading(
+    path[0],
+    path[1],
+  );
+
+  document.getElementById("heading").value = String(heading);
+  document.getElementById("origin").value = String(path[0]);
+  document.getElementById("destination").value = String(path[1]);
+}
+
+window.initMap = initMap;
+
 }

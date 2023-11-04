@@ -62,14 +62,13 @@ function update() {
     path[1],
   );
 
-  document.getElementById("heading").value = String(heading);
-  document.getElementById("origin").value = String(path[0]);
-  document.getElementById("destination").value = String(path[1]);
 
   const distance = google.maps.geometry.spherical.computeDistanceBetween(path[0], path[1]);
-  console.log(distance);
 
-  
+  document.getElementById("distance").value = String(distance);
+  document.getElementById("origin").value = String(marker1.label);
+  document.getElementById("destination").value = String(marker2.label);
+
 }
 
 window.initMap = initMap;

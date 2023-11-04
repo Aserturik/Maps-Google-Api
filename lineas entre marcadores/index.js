@@ -1,7 +1,6 @@
 // This example requires the Geometry library. Include the libraries=geometry
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=geometry">
-
 let marker1, marker2;
 let poly, geodesicPoly;
 
@@ -14,72 +13,19 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(
     document.getElementById("info"),
   );
+  marker1 = new google.maps.Marker({
+    map,
+    draggable: true,
+    label: "A",
+    position: { lat: 5.554669754471106, lng: -73.35761563444203 },
+  });
+  marker2 = new google.maps.Marker({
+    map,
+    draggable: true,
+    label: "B",
+    position: { lat: 5.551582897545935, lng: -73.35286297239529 },
+  });
 
-
-  const markers = {
-    marker1: {
-      map,
-      draggable: true,
-      label: "A",
-      position: { lat: 5.554669754471106, lng: -73.35761563444203 },
-    },
-    marker2: {
-      map,
-      draggable: true,
-      label: "B",
-      position: { lat: 5.551582897545935, lng: -73.35286297239529 },
-    },
-    maker3: {
-      map,
-      draggable: true,
-      label: "C",
-      position: { lat: 5.551582897545935, lng: -73.35286297239529 },
-    },
-    maker4: {
-      map,
-      draggable: true,
-      label: "D",
-      position: { lat: 5.551582897545935, lng: -73.35286297239529 },
-    },
-    maker5: {
-      map,
-      draggable: true,
-      label: "E",
-      position: { lat: 5.551582897545935, lng: -73.35286297239529 },
-    },
-    maker6: {
-      map,
-      draggable: true,
-      label: "F",
-      position: { lat: 5.551582897545935, lng: -73.35286297239529 },
-    },
-    maker7: {
-      map,
-      draggable: true,
-      label: "G",
-      position: { lat: 5.551582897545935, lng: -73.35286297239529 },
-    },
-    maker8: {
-      map,
-      draggable: true,
-      label: "H",
-      position: { lat: 5.551582897545935, lng: -73.35286297239529 },
-    },
-    maker9: {
-      map,
-      draggable: true,
-      label: "I",
-      position: { lat: 5.551582897545935, lng: -73.35286297239529 },
-    },
-    maker10: {
-      map,
-      draggable: true,
-      label: "J",
-      position: { lat: 5.551582897545935, lng: -73.35286297239529 },
-    },
-  };
-
-  
   const bounds = new google.maps.LatLngBounds(
     marker1.getPosition(),
     marker2.getPosition(),
@@ -116,13 +62,13 @@ function update() {
     path[1],
   );
 
+  document.getElementById("heading").value = String(heading);
+  document.getElementById("origin").value = String(path[0]);
+  document.getElementById("destination").value = String(path[1]);
 
   const distance = google.maps.geometry.spherical.computeDistanceBetween(path[0], path[1]);
   console.log(distance);
 
-  document.getElementById("distance").value = String(distance);
-  document.getElementById("origin").value = String(marker1.label);
-  //document.getElementById("destination").value = String(path[1]);
   
 }
 

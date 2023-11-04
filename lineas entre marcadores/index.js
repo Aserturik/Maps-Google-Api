@@ -1,29 +1,32 @@
-// This example requires the Geometry library. Include the libraries=geometry
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=geometry">
 let marker1, marker2;
 let poly, geodesicPoly;
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 4,
     center: { lat: 5.554669754471106, lng: -73.35761563444203},
+    fullscreenControl:true,
+    mapTypeControl:true,
+    streetViewControl:false,
+    zoom:16,
+    zoomControl:true,
+    maxZoom:20,
   });
 
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(
     document.getElementById("info"),
   );
+
   marker1 = new google.maps.Marker({
     map,
     draggable: true,
     label: "A",
-    position: { lat: 5.554669754471106, lng: -73.35761563444203 },
+    position: { lat: 5.552026661382956, lng: -73.35666170388217},
   });
   marker2 = new google.maps.Marker({
     map,
     draggable: true,
     label: "B",
-    position: { lat: 5.551582897545935, lng: -73.35286297239529 },
+    position: { lat: 5.551469188599672, lng: -73.35649737223628},
   });
 
   const bounds = new google.maps.LatLngBounds(
@@ -68,7 +71,6 @@ function update() {
   document.getElementById("distance").value = String(distance);
   document.getElementById("origin").value = String(marker1.label);
   document.getElementById("destination").value = String(marker2.label);
-
 }
 
 window.initMap = initMap;

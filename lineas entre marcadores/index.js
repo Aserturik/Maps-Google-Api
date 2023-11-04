@@ -1,4 +1,4 @@
-let marker1, marker2;
+let marker1, marker2, marker3, marker4, marker5, marker6, marker7, marker8, marker9, marker10;
 let poly, geodesicPoly;
 
 function initMap() {
@@ -28,15 +28,30 @@ function initMap() {
     label: "B",
     position: { lat: 5.551469188599672, lng: -73.35649737223628},
   });
+  marker3 = new google.maps.Marker({
+    map,
+    draggable: true,
+    label: "C",
+    position: { lat: 5.551513535293195, lng:  -73.35715795891471},
+  });
+  marker4 = new google.maps.Marker({
+    map,
+    draggable: true,
+    label: "D",
+    position: { lat: 5.551695140693053, lng:  -73.35607699367031},
+  });
 
   const bounds = new google.maps.LatLngBounds(
     marker1.getPosition(),
     marker2.getPosition(),
+    marker3.getPosition(),
+    marker4.getPosition(),
   );
 
   map.fitBounds(bounds);
   google.maps.event.addListener(marker1, "position_changed", update);
   google.maps.event.addListener(marker2, "position_changed", update);
+  google.maps.event.addListener(marker3, "position_changed", update);
   poly = new google.maps.Polyline({
     strokeColor: "#FF0000",
     strokeOpacity: 1.0,

@@ -90,12 +90,6 @@ function update() {
   
   geodesicPoly.setPath(path);
 
-  const heading = google.maps.geometry.spherical.computeHeading(
-    path[0],
-    path[1],
-  );
-
-
   const distance = google.maps.geometry.spherical.computeDistanceBetween(path[0], path[1]);
 
   document.getElementById("distance").value = String(distance);

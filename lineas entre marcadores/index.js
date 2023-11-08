@@ -1,5 +1,5 @@
 let marker1, marker2, marker3, marker4, marker5, marker6, marker7, marker8, marker9, marker10;
-let poly, geodesicPoly;
+let poly, geodesicPoly, poly2, geodesicPoly2;
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -52,12 +52,25 @@ function initMap() {
   google.maps.event.addListener(marker1, "position_changed", update);
   google.maps.event.addListener(marker2, "position_changed", update);
   google.maps.event.addListener(marker3, "position_changed", update);
+  google.maps.event.addListener(marker4, "position_changed", update);
   poly = new google.maps.Polyline({
     strokeColor: "#FF0000",
     strokeOpacity: 1.0,
     strokeWeight: 3,
     zIndex:2,
     map: map,
+  });
+
+  poly2 = new google.maps.Polyline({
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 3,
+    zIndex:2,
+    map: map,
+  });
+
+  geodesicPoly2 = new google.maps.Polyline({
+      
   });
 
 
@@ -69,8 +82,10 @@ function initMap() {
 
 function update() {
   const path = [marker1.getPosition(), marker2.getPosition()];
+  const path2 = [marker3.getPosition(), marker1.getPosition()];
 
   poly.setPath(path);
+  poly2.setPath(path2);
   // poner en la polylinea la distancia entre los marcadores
   
   geodesicPoly.setPath(path);

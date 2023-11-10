@@ -7,7 +7,10 @@ class arco{
       zIndex:2,
       map: map,
     });
+    this.nodoA = nodoA;
+    this.nodoB = nodoB;
     this.path = [nodoA.Marker.getPosition(), nodoB.Marker.getPosition()];
+    this.poly.setPath(this.path);
   }
 }
 

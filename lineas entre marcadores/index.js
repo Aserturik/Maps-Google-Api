@@ -42,6 +42,12 @@ function initMap() {
   });
 
   const bounds = new google.maps.LatLngBounds(
+
+    //for (Node: node){
+    // Aqui va el for de rellenar a los nodos con el marker.getPosition
+    //  node.getPosition()
+    //}
+
     marker1.getPosition(),
     marker2.getPosition(),
     marker3.getPosition(),

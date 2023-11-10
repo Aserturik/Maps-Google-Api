@@ -14,6 +14,7 @@ function initMap() {
     zoom:18,
     zoomControl:true,
     maxZoom:20,
+    contexMenu:true,
   });
 
   // Arreglo de la clase nodo
@@ -50,6 +51,7 @@ function initMap() {
   
   for (let i = 0; i < nodes.length; i++) {
     google.maps.event.addListener(nodes[i].Marker, "position_changed", update);
+    google.maps.event.addListener(nodes[i].Marker, "contextmenu", contexMenu);
   }
 
   update();
@@ -67,6 +69,10 @@ function update() {
   // document.getElementById("distance").value = String(distance);
   // document.getElementById("origin").value = String(marker1.label);
   // document.getElementById("destination").value = String(marker2.label);
+}
+
+function contexMenu(event){
+  console.log("muchasoooooo");
 }
 
 window.initMap = initMap;

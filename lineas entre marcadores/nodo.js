@@ -3,6 +3,7 @@ class nodo{
     this.Marker = new google.maps.Marker({
       map,
       draggable: true,
+      clickable: true,
       label: label,
       position: { lat: lat, lng: lng},
     });

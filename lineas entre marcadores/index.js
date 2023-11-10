@@ -72,7 +72,7 @@ function update() {
 }
 
 function contexMenu(event){
-  console.log("muchasoooooo");
+  console.log("click derecho en el marcador");
 }
 
 window.initMap = initMap;

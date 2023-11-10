@@ -1,5 +1,5 @@
 class arco{
-  constructor(map, markerA, markerB){
+  constructor(map, nodoA, nodoB){
     this.poly = new google.maps.Polyline({
       strokeColor: "#FF0000",
       strokeOpacity: 1.0,
@@ -7,7 +7,8 @@ class arco{
       zIndex:2,
       map: map,
     });
-
-    this.path = [markerA.getPosition(), markerB.getPosition()];
+    this.path = [nodoA.Marker.getPosition(), nodoB.Marker.getPosition()];
   }
 }
+
+export default arco;

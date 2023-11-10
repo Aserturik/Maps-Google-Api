@@ -8,3 +8,5 @@ class nodo{
     });
   }
 }
+
+export default nodo;

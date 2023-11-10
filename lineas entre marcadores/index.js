@@ -7,13 +7,13 @@ import arco from "./arco.js";
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 5.554669754471106, lng: -73.35761563444203},
+    center: { lat: 5.551348977764909, lng: -73.35646257447256},
     fullscreenControl:true,
     mapTypeControl:true,
     streetViewControl:false,
-    zoom:20,
+    zoom:18,
     zoomControl:true,
-    maxZoom:19,
+    maxZoom:20,
   });
 
   // Arreglo de la clase nodo
@@ -21,13 +21,13 @@ function initMap() {
     new nodo(map, "A", 5.552026661382956, -73.35666170388217),
     new nodo(map, "B", 5.551469188599672, -73.35649737223628),
     new nodo(map, "C", 5.551513535293195, -73.35715795891471),
-    new nodo(map, "D", 5.553695140693053, -73.35607699367031),
-    new nodo(map, "E", 5.554026661382344, -73.35666170384355),
-    new nodo(map, "F", 5.555469188595435, -73.35649737223454),
-    new nodo(map, "G", 5.556513535234666, -73.35715795846456),
-    new nodo(map, "H", 5.557695140693532, -73.35607699323432),
-    new nodo(map, "I", 5.558695140653456, -73.35607699345634),
-    new nodo(map, "J", 5.559695140532453, -73.35607699534667),
+    new nodo(map, "D", 5.551403150227596, -73.35771800613736),
+    new nodo(map, "E", 5.550686000699201, -73.35645708130097),
+    new nodo(map, "F", 5.550967105703704, -73.35547858581054),
+    new nodo(map, "G", 5.551635559605786, -73.35448007559745),
+    new nodo(map, "H", 5.552425756674258, -73.35687878659566),
+    new nodo(map, "I", 5.549840276077607, -73.35699016854028),
+    new nodo(map, "J", 5.549417510996117, -73.35647423459095),
   ];
 
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(

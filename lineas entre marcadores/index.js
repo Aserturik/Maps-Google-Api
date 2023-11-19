@@ -57,15 +57,9 @@ function initMap() {
 // Calculate distance between nodes and update polyline weight
 const update = () => {
   arcs.forEach((arc) => {
+    arc.updateWeight();
     arc.path = [arc.nodoA.Marker.getPosition(), arc.nodoB.Marker.getPosition()];
     arc.poly.setPath(arc.path);
-
-    const distance = google.maps.geometry.spherical.computeDistanceBetween(
-      arc.nodoA.Marker.getPosition(),
-      arc.nodoB.Marker.getPosition()
-    );
-
-    arc.weight = distance.toFixed(2);
 
     const arcInfo = document.getElementById(`arc-${arc.nodoA.label}-${arc.nodoB.label}`);
     if (arcInfo) {
@@ -73,18 +67,6 @@ const update = () => {
     }
   });
 };
-
-// const update = () => {
-//   arcs.forEach((arc) => {
-//     arc.path = [arc.nodoA.Marker.getPosition(), arc.nodoB.Marker.getPosition()];
-//     arc.poly.setPath(arc.path);
-//   });
-
-// const distance = google.maps.geometry.spherical.computeDistanceBetween(path[0], path[1]);
-// document.getElementById("distance").value = String(distance);
-// document.getElementById("origin").value = String(marker1.label);
-// document.getElementById("destination").value = String(marker2.label);
-// };
 
 const contextMenu = (event) => {
   console.log("click derecho en el marcador");

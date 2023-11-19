@@ -22,7 +22,7 @@ class arco{
       this.nodoA.Marker.getPosition(),
       this.nodoB.Marker.getPosition()
     );
-    this.weight = distance;
+    this.weight = distance.toFixed(2);
   }
 }
 

@@ -66,11 +66,10 @@ const update = () => {
     );
 
     arc.weight = distance.toFixed(2);
-    //arc.poly.setOptions({ arc.poly.strokeWeight}); // Reduce the strokeWeight value
 
     const arcInfo = document.getElementById(`arc-${arc.nodoA.label}-${arc.nodoB.label}`);
     if (arcInfo) {
-      arcInfo.innerHTML = `Distance: ${arc.weight} meters`;
+      arcInfo.innerHTML = `La distancia entre el nodo ${arc.nodoA.Marker.label} y ${arc.nodoB.Marker.label} es de: ${arc.weight} metros`;
     }
   });
 };

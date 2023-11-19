@@ -1,14 +1,9 @@
-/* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
- #map {
+/* Establece la altura del mapa de forma explícita para definir el tamaño del elemento div que contiene el mapa */
+#map {
   height: 100%;
 }
 
-/* 
- * Optional: Makes the sample page fill the window. 
- */
+/* Opcional: Hace que la página de ejemplo llene la ventana */
 html,
 body {
   height: 100%;
@@ -16,6 +11,7 @@ body {
   padding: 0;
 }
 
+/* Estilos para el menú de eliminación */
 .delete-menu {
   position: absolute;
   background: white;
@@ -33,4 +29,28 @@ body {
 
 .delete-menu:hover {
   background: #eee;
+}
+
+/* Estilos para los botones de inicio y fin */
+#boton-inicio,
+#boton-destino {
+  margin: 0 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: rgb(204, 50, 50);
+  border: none;
+  cursor: pointer;
+}
+
+#boton-inicio:hover,
+#boton-destino:hover {
+  background-color: #45a049;
+}
+
+/* Estilos para el texto del nodo seleccionado */
+#nodoSeleccionado {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }

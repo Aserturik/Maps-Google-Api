@@ -9,15 +9,12 @@
   <body>
     <div id="map"></div>
 
-    <!-- 
-      The `defer` attribute causes the callback to execute after the full HTML
-      document has been parsed. For non-blocking uses, avoiding race conditions,
-      and consistent behavior across browsers, consider loading using Promises.
-      See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
-      for more information.
-      -->
+    <button id="inicio">Inicio</button>
+    <button id="fin">Fin</button>
+    <p id="nodoSeleccionado"></p>
+
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiKnExLsUSk2XOWzYJWUrYbNxE8ZceAHE&callback=initialize&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initialize&v=weekly"
       defer
     ></script>
   </body>

@@ -1,14 +1,9 @@
-/* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
- #map {
+/* Establece la altura del mapa de forma explícita para definir el tamaño del elemento div que contiene el mapa */
+#map {
   height: 100%;
 }
 
-/* 
- * Optional: Makes the sample page fill the window. 
- */
+/* Opcional: Hace que la página de ejemplo llene la ventana */
 html,
 body {
   height: 100%;
@@ -28,4 +23,28 @@ body {
   font-family: "Roboto", "sans-serif";
   line-height: 30px;
   padding-left: 10px;
+}
+
+/* Estilos para los botones de inicio y fin */
+#boton-inicio,
+#boton-destino {
+  margin: 0 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+}
+
+#boton-inicio:hover,
+#boton-destino:hover {
+  background-color: #45a049;
+}
+
+/* Estilos para el texto del nodo seleccionado */
+#nodoSeleccionado {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }

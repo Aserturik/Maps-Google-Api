@@ -1,6 +1,5 @@
 import Nodo from "./nodo.js";
 import Arco from "./arco.js";
-import PriorityQueue from "./priorityQueue.js";
 
 const arcs = [];
 const nodes = [];
@@ -56,7 +55,6 @@ function initMap() {
     new Arco(map, nodes[8], nodes[9]),
     new Arco(map, nodes[9], nodes[0])
   );
-
   nodes.forEach((node) => {
     node.setArcs(arcs);
   });
@@ -75,6 +73,7 @@ function initMap() {
           strokeWeight: 1,
           strokeColor: "black",
         });
+        update(); // Call update() after selecting startNode
         return;
       }
 
@@ -111,7 +110,7 @@ function initMap() {
       document.getElementById("distance").value = String(distance);
       document.getElementById("origin").value = String(startNode.label);
       document.getElementById("destination").value = String(endNode.label);
-      update();
+      update(); // Call update() after selecting endNode
 
       if (startNode && endNode) {
         const result = dijkstra(startNode, endNode);
@@ -139,35 +138,36 @@ const update = () => {
   });
 };
 
-function dijkstra() {
-  const startNode = Graph.nodes[0];
-  const endNode = Graph.nodes[9];
+function dijkstra(startNode, endNode) {
   const visited = new Set();
   const distances = {};
   const previous = {};
-  const queue = new PriorityQueue();
+  const queue = [];
 
   distances[startNode.label] = 0;
-  queue.enqueue(startNode, 0);
+  queue.push({ node: startNode, distance: 0 });
 
-  while (!queue.isEmpty()) {
-    const currentNode = queue.dequeue().element;
-    console.log(currentNode);
-    if (currentNode === endNode) {
+  while (queue.length > 0) {
+    queue.sort((a, b) => a.distance - b.distance);
+    const { node, distance } = queue.shift();
+
+    if (node === endNode) {
+      console.log("Found the end node");
       break;
     }
 
-    if (!visited.has(currentNode)) {
-      visited.add(currentNode);
+    if (!visited.has(node)) {
+      visited.add(node);
 
-      if (currentNode.neighbors && typeof currentNode.neighbors[Symbol.iterator] === 'function') {
-        currentNode.neighbors.forEach((neighbor) => {
-          const distance = distances[currentNode.label] + neighbor.weight;
+      if (node.neighbors && typeof node.neighbors[Symbol.iterator] === 'function') {
+        node.neighbors.forEach((neighbor) => {
+          const neighborNode = neighbor.node;
+          const neighborDistance = distances[node.label] + neighbor.weight;
 
-          if (!distances[neighbor.node.label] || distance < distances[neighbor.node.label]) {
-            distances[neighbor.node.label] = distance;
-            previous[neighbor.node.label] = currentNode;
-            queue.enqueue(neighbor.node, distance);
+          if (!distances[neighborNode.label] || neighborDistance < distances[neighborNode.label]) {
+            distances[neighborNode.label] = neighborDistance;
+            previous[neighborNode.label] = node;
+            queue.push({ node: neighborNode, distance: neighborDistance });
           }
         });
       }

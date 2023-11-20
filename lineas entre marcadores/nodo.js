@@ -1,17 +1,22 @@
 const nodeArcs = [];
-class nodo{
-  constructor(map, label, lat, lng, color){
+class nodo {
+  constructor(map, label, lat, lng, color, id, nombre, x, y) {
     this.map = map;
     this.label = label;
     this.lat = lat;
     this.lng = lng;
     this.color = color;
+    this.id = id;
+    this.nombre = nombre;
+    this.x = x;
+    this.y = y;
+    this.neighbors = [];
     this.Marker = new google.maps.Marker({
       map,
       draggable: true,
       clickable: true,
       label: label,
-      position: { lat: lat, lng: lng},
+      position: { lat: lat, lng: lng },
     });
 
     this.Marker.setIcon({
@@ -24,15 +29,15 @@ class nodo{
     });
   }
 
-  contextMenu(){
+  contextMenu() {
     console.log("contextMenu");
   }
 
-  setArcs(nodeArcs){
+  setArcs(nodeArcs) {
     this.nodeArcs = nodeArcs;
   }
 
-  getArcs(){
+  getArcs() {
     return nodeArcs;
   }
 }

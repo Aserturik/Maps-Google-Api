@@ -1,5 +1,6 @@
 class arco{
-  constructor(map, nodoA, nodoB){
+  constructor(map, nodoA, nodoB, id){
+    this.id = id;
     this.map = map;
     this.nodoA = nodoA;
     this.nodoB = nodoB;

@@ -9,6 +9,7 @@ const nodes = [];
 let startNode = null;
 let endNode = null;
 let distance = 0;
+let temporalArc = null;
 const shortestRoute = [];
 //const graph = new Graph();
 
@@ -121,6 +122,7 @@ function initMap() {
         if (shareArc){
           shareArc.changeColorPoly("yellow");
           document.getElementById("distance").value = String(shareArc.weight);
+          temporalArc = shareArc;
         }
         
 
@@ -157,6 +159,10 @@ const update = () => {
     const arcInfo = document.getElementById(`arc-${arc.nodoA.label}-${arc.nodoB.label}`);
     if (arcInfo) {
       arcInfo.innerHTML = `La distancia entre el nodo ${arc.nodoA.Marker.label} y ${arc.nodoB.Marker.label} es de: ${arc.weight} metros`;
+    }
+
+    if(temporalArc){
+      document.getElementById("distance").value = String(temporalArc.weight);
     }
   });
 };

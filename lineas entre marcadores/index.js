@@ -48,7 +48,17 @@ function initMap() {
 
   nodes.forEach((node) => {
     google.maps.event.addListener(node.Marker, "position_changed", update);
-    google.maps.event.addListener(node.Marker, "contextmenu", contextMenu);
+    google.maps.event.addListener(node.Marker, "click", () => {
+      // cambiar color del nodo
+      node.Marker.setIcon({
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 20,
+        fillColor: "yellow",
+        fillOpacity: 1,
+        strokeWeight: 1,
+        strokeColor: "black",
+      });
+    });
   });
 
   update();
@@ -66,10 +76,6 @@ const update = () => {
       arcInfo.innerHTML = `La distancia entre el nodo ${arc.nodoA.Marker.label} y ${arc.nodoB.Marker.label} es de: ${arc.weight} metros`;
     }
   });
-};
-
-const contextMenu = (event) => {
-  console.log("click derecho en el marcador");
 };
 
 window.initMap = initMap;

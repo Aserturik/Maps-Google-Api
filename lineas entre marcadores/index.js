@@ -1,5 +1,6 @@
 import Nodo from "./nodo.js";
 import Arco from "./arco.js";
+import PriorityQueue from "./priorityQueue.js";
 
 const arcs = [];
 const nodes = [];
@@ -104,8 +105,9 @@ function initMap() {
     });
   });
 
-  update();
-  dijkstra(startNode, endNode);
+  if (startNode && endNode) {
+    dijkstra(startNode, endNode);
+  }
 }
 
 // Calculate distance between nodes and update polyline weight
@@ -156,9 +158,17 @@ function dijkstra(startNode, endNode) {
   let shortestRoute = [];
   let currentNode = endNode;
 
-  while (currentNode !== startNode) {
+  while (currentNode !== startNode && currentNode !== null) {
     shortestRoute.unshift(currentNode);
     currentNode = previous[currentNode.label];
+  }
+
+  if (currentNode === null) {
+    // Handle the case when there is no route from startNode to endNode
+    return {
+      distance: Infinity,
+      shortestRoute: [],
+    };
   }
 
   shortestRoute.unshift(startNode);

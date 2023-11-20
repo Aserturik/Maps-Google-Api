@@ -102,12 +102,13 @@ function initMap() {
       document.getElementById("origin").value = String(startNode.label);
       document.getElementById("destination").value = String(endNode.label);
       update();
+
+      if (startNode && endNode) {
+        console.log("startNode");
+        dijkstra(startNode, endNode);
+      }
     });
   });
-
-  if (startNode && endNode) {
-    dijkstra(startNode, endNode);
-  }
 }
 
 // Calculate distance between nodes and update polyline weight
@@ -143,27 +144,29 @@ function dijkstra(startNode, endNode) {
     if (!visited.has(currentNode)) {
       visited.add(currentNode);
 
-      currentNode.neighbors.forEach((neighbor) => {
-        const distance = distances[currentNode.label] + neighbor.weight;
+      if (currentNode.neighbors && typeof currentNode.neighbors[Symbol.iterator] === 'function') {
+        currentNode.neighbors.forEach((neighbor) => {
+          const distance = distances[currentNode.label] + neighbor.weight;
 
-        if (!distances[neighbor.node.label] || distance < distances[neighbor.node.label]) {
-          distances[neighbor.node.label] = distance;
-          previous[neighbor.node.label] = currentNode;
-          queue.enqueue(neighbor.node, distance);
-        }
-      });
+          if (!distances[neighbor.node.label] || distance < distances[neighbor.node.label]) {
+            distances[neighbor.node.label] = distance;
+            previous[neighbor.node.label] = currentNode;
+            queue.enqueue(neighbor.node, distance);
+          }
+        });
+      }
     }
   }
 
   let shortestRoute = [];
   let currentNode = endNode;
 
-  while (currentNode !== startNode && currentNode !== null) {
+  while (currentNode !== startNode && currentNode !== null && currentNode !== undefined) {
     shortestRoute.unshift(currentNode);
     currentNode = previous[currentNode.label];
   }
 
-  if (currentNode === null) {
+  if (currentNode === null || currentNode === undefined) {
     // Handle the case when there is no route from startNode to endNode
     return {
       distance: Infinity,

@@ -4,6 +4,11 @@ import PriorityQueue from "./priorityQueue.js";
 
 const arcs = [];
 const nodes = [];
+const Graph = {
+  nodes,
+  arcs,
+};
+
 let startNode = null;
 let endNode = null;
 let distance = 0;
@@ -134,7 +139,9 @@ const update = () => {
   });
 };
 
-function dijkstra(startNode, endNode) {
+function dijkstra() {
+  const startNode = Graph.nodes[0];
+  const endNode = Graph.nodes[9];
   const visited = new Set();
   const distances = {};
   const previous = {};
@@ -145,7 +152,7 @@ function dijkstra(startNode, endNode) {
 
   while (!queue.isEmpty()) {
     const currentNode = queue.dequeue().element;
-
+    console.log(currentNode);
     if (currentNode === endNode) {
       break;
     }
@@ -185,12 +192,10 @@ function dijkstra(startNode, endNode) {
 
   shortestRoute.unshift(startNode);
 
-
   return {
     distance: distances[endNode.label],
     shortestRoute: shortestRoute.map((node) => node.label),
   };
-
 }
 
 window.initMap = initMap;

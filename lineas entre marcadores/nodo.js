@@ -29,8 +29,6 @@ class nodo{
   }
 
   setArcs(nodeArcs){
-    console.log("Nombre del nodo: " + this.label);
-    console.log("Arcos del nodo: " + nodeArcs);
     this.nodeArcs = nodeArcs;
   }
 

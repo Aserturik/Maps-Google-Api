@@ -1,0 +1,12 @@
+{
+  "name": "maps-google-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "js-priority-queue": "^0.1.5"
+  }
+}

@@ -1,5 +1,7 @@
 import Nodo from "./nodo.js";
 import Arco from "./arco.js";
+//import PriorityQueue from "js-priority-queue"; 
+// Usa la biblioteca PriorityQueue en tu código
 
 const arcs = [];
 const nodes = [];
@@ -139,63 +141,8 @@ const update = () => {
 };
 
 function dijkstra(startNode, endNode) {
-  const visited = new Set();
-  const distances = {};
-  const previous = {};
-  const queue = [];
-
-  distances[startNode.label] = 0;
-  queue.push({ node: startNode, distance: 0 });
-
-  while (queue.length > 0) {
-    queue.sort((a, b) => a.distance - b.distance);
-    const { node, distance } = queue.shift();
-
-    if (node === endNode) {
-      console.log("Found the end node");
-      break;
-    }
-
-    if (!visited.has(node)) {
-      visited.add(node);
-
-      if (node.neighbors && typeof node.neighbors[Symbol.iterator] === 'function') {
-        node.neighbors.forEach((neighbor) => {
-          const neighborNode = neighbor.node;
-          const neighborDistance = distances[node.label] + neighbor.weight;
-
-          if (!distances[neighborNode.label] || neighborDistance < distances[neighborNode.label]) {
-            distances[neighborNode.label] = neighborDistance;
-            previous[neighborNode.label] = node;
-            queue.push({ node: neighborNode, distance: neighborDistance });
-          }
-        });
-      }
-    }
-  }
-
-  let shortestRoute = [];
-  let currentNode = endNode;
-
-  while (currentNode !== startNode && currentNode !== null && currentNode !== undefined) {
-    shortestRoute.unshift(currentNode);
-    currentNode = previous[currentNode.label];
-  }
-
-  if (currentNode === null || currentNode === undefined) {
-    // Handle the case when there is no route from startNode to endNode
-    return {
-      distance: Infinity,
-      shortestRoute: [],
-    };
-  }
-
-  shortestRoute.unshift(startNode);
-
-  return {
-    distance: distances[endNode.label],
-    shortestRoute: shortestRoute.map((node) => node.label),
-  };
+  
 }
+
 
 window.initMap = initMap;

@@ -12,6 +12,15 @@ class nodo{
       label: label,
       position: { lat: lat, lng: lng},
     });
+
+    this.Marker.setIcon({
+      path: google.maps.SymbolPath.CIRCLE,
+      scale: 20,
+      fillColor: "red",
+      fillOpacity: 1,
+      strokeWeight: 1,
+      strokeColor: "black",
+    });
   }
 
   contextMenu(){

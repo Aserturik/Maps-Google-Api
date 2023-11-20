@@ -1,8 +1,12 @@
-const arcs = [];
-const nodes = [];
-
 import Nodo from "./nodo.js";
 import Arco from "./arco.js";
+
+const arcs = [];
+const nodes = [];
+const nodeStart = nodes[0];
+const nodeEnd = nodes[1];
+const shortestRoute = [];
+
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -49,7 +53,6 @@ function initMap() {
   nodes.forEach((node) => {
     google.maps.event.addListener(node.Marker, "position_changed", update);
     google.maps.event.addListener(node.Marker, "click", () => {
-      // cambiar color del nodo
       node.Marker.setIcon({
         path: google.maps.SymbolPath.CIRCLE,
         scale: 20,

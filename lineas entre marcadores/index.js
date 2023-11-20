@@ -52,7 +52,31 @@ function initMap() {
   nodes.forEach((node) => {
     google.maps.event.addListener(node.Marker, "position_changed", update);
     google.maps.event.addListener(node.Marker, "click", () => {
+
+      if (!startNode) {
+        startNode = node;
+        startNode.Marker.setIcon({
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 20,
+          fillColor: "yellow",
+          fillOpacity: 1,
+          strokeWeight: 1,
+          strokeColor: "black",
+        });
+        return;
+      }
+
+
       if (endNode) {
+        startNode.Marker.setIcon({
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 20,
+          fillColor: "red",
+          fillOpacity: 1,
+          strokeWeight: 1,
+          strokeColor: "black",
+        });
+
         startNode = endNode;
         startNode.Marker.setIcon({
           path: google.maps.SymbolPath.CIRCLE,
@@ -67,7 +91,7 @@ function initMap() {
       endNode.Marker.setIcon({
         path: google.maps.SymbolPath.CIRCLE,
         scale: 20,
-        fillColor: "red",
+        fillColor: "yellow",
         fillOpacity: 1,
         strokeWeight: 1,
         strokeColor: "black",
@@ -95,5 +119,7 @@ const update = () => {
     }
   });
 };
+
+
 
 window.initMap = initMap;

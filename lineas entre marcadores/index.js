@@ -40,6 +40,7 @@ function initMap() {
 
   arcs.push(
     new Arco(map, nodes[0], nodes[1]),
+    new Arco(map, nodes[0], nodes[7]),
     new Arco(map, nodes[1], nodes[2]),
     new Arco(map, nodes[2], nodes[3]),
     new Arco(map, nodes[3], nodes[0]),
@@ -50,6 +51,10 @@ function initMap() {
     new Arco(map, nodes[8], nodes[9]),
     new Arco(map, nodes[9], nodes[0])
   );
+
+  nodes.forEach((node) => {
+    node.setArcs(arcs);
+  });
 
   nodes.forEach((node) => {
     google.maps.event.addListener(node.Marker, "position_changed", update);
@@ -104,8 +109,12 @@ function initMap() {
       update();
 
       if (startNode && endNode) {
-        console.log("startNode");
-        dijkstra(startNode, endNode);
+        const result = dijkstra(startNode, endNode);
+        console.log(result);
+        // distance = result.distance;
+        // shortestRoute = result.shortestRoute;
+        // console.log(shortestRoute);
+        // console.log(distance);
       }
     });
   });
@@ -176,10 +185,12 @@ function dijkstra(startNode, endNode) {
 
   shortestRoute.unshift(startNode);
 
+
   return {
     distance: distances[endNode.label],
     shortestRoute: shortestRoute.map((node) => node.label),
   };
+
 }
 
 window.initMap = initMap;

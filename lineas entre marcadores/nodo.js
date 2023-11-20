@@ -1,3 +1,4 @@
+const nodeArcs = [];
 class nodo{
   constructor(map, label, lat, lng, color){
     this.map = map;
@@ -25,6 +26,16 @@ class nodo{
 
   contextMenu(){
     console.log("contextMenu");
+  }
+
+  setArcs(nodeArcs){
+    console.log("Nombre del nodo: " + this.label);
+    console.log("Arcos del nodo: " + nodeArcs);
+    this.nodeArcs = nodeArcs;
+  }
+
+  getArcs(){
+    return nodeArcs;
   }
 }
 

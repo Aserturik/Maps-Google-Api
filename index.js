@@ -1,6 +1,6 @@
 import Nodo from "./nodo.js";
 import Arco from "./arco.js";
-import Graph from "./graph.js";
+//import Graph from "./graph.js";
 // Usa la biblioteca PriorityQueue en tu código
 
 const arcs = [];
@@ -10,7 +10,7 @@ let startNode = null;
 let endNode = null;
 let distance = 0;
 const shortestRoute = [];
-const graph = new Graph();
+//const graph = new Graph();
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -57,8 +57,6 @@ function initMap() {
   nodes.forEach((node) => {
     node.setArcs(arcs);
   });
-
-  arcs[0].changeColorPoly("blue");
 
   nodes.forEach((node) => {
     google.maps.event.addListener(node.Marker, "position_changed", update);
@@ -120,7 +118,11 @@ function initMap() {
         }
 
         const shareArc = getSharedArc(startNode, endNode);
-        shareArc.changeColorPoly("yellow");
+        if (shareArc){
+          shareArc.changeColorPoly("yellow");
+          document.getElementById("distance").value = String(shareArc.weight);
+        }
+        
 
 
         const result = dijkstra(startNode, endNode);
@@ -160,11 +162,7 @@ const update = () => {
 };
 
 function dijkstra(startNode, endNode) {
-  const result = graph.dijkstra(startNode, endNode);
-  distance = result.distance;
-  shortestRoute = result.shortestRoute;
-  console.log(shortestRoute);
-  console.log(distance);
+  
 }
 
 

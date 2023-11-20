@@ -25,23 +25,6 @@ body {
   padding-left: 10px;
 }
 
-/* Estilos para los botones de inicio y fin */
-#boton-inicio,
-#boton-destino {
-  margin: 0 5px;
-  padding: 5px 10px;
-  font-size: 14px;
-  background-color: #4CAF50;
-  color: rgb(255, 255, 255);
-  border: none;
-  cursor: pointer;
-}
-
-#boton-inicio:hover,
-#boton-destino:hover {
-  background-color: #45a049;
-}
-
 /* Estilos para el texto del nodo seleccionado */
 #nodoSeleccionado {
   margin-top: 10px;

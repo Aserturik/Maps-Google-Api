@@ -5,6 +5,7 @@ const arcs = [];
 const nodes = [];
 let startNode = null;
 let endNode = null;
+let distance = 0;
 const shortestRoute = [];
 
 function initMap() {
@@ -104,6 +105,7 @@ function initMap() {
   });
 
   update();
+  dijkstra(startNode, endNode);
 }
 
 // Calculate distance between nodes and update polyline weight
@@ -120,6 +122,51 @@ const update = () => {
   });
 };
 
+function dijkstra(startNode, endNode) {
+  const visited = new Set();
+  const distances = {};
+  const previous = {};
+  const queue = new PriorityQueue();
 
+  distances[startNode.label] = 0;
+  queue.enqueue(startNode, 0);
+
+  while (!queue.isEmpty()) {
+    const currentNode = queue.dequeue().element;
+
+    if (currentNode === endNode) {
+      break;
+    }
+
+    if (!visited.has(currentNode)) {
+      visited.add(currentNode);
+
+      currentNode.neighbors.forEach((neighbor) => {
+        const distance = distances[currentNode.label] + neighbor.weight;
+
+        if (!distances[neighbor.node.label] || distance < distances[neighbor.node.label]) {
+          distances[neighbor.node.label] = distance;
+          previous[neighbor.node.label] = currentNode;
+          queue.enqueue(neighbor.node, distance);
+        }
+      });
+    }
+  }
+
+  let shortestRoute = [];
+  let currentNode = endNode;
+
+  while (currentNode !== startNode) {
+    shortestRoute.unshift(currentNode);
+    currentNode = previous[currentNode.label];
+  }
+
+  shortestRoute.unshift(startNode);
+
+  return {
+    distance: distances[endNode.label],
+    shortestRoute: shortestRoute.map((node) => node.label),
+  };
+}
 
 window.initMap = initMap;

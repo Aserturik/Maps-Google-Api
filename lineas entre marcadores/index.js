@@ -3,10 +3,9 @@ import Arco from "./arco.js";
 
 const arcs = [];
 const nodes = [];
-const nodeStart = nodes[0];
-const nodeEnd = nodes[1];
+let startNode = null;
+let endNode = null;
 const shortestRoute = [];
-
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -53,14 +52,30 @@ function initMap() {
   nodes.forEach((node) => {
     google.maps.event.addListener(node.Marker, "position_changed", update);
     google.maps.event.addListener(node.Marker, "click", () => {
-      node.Marker.setIcon({
+      if (endNode) {
+        startNode = endNode;
+        startNode.Marker.setIcon({
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 20,
+          fillColor: "yellow",
+          fillOpacity: 1,
+          strokeWeight: 1,
+          strokeColor: "black",
+        });
+      }
+      endNode = node;
+      endNode.Marker.setIcon({
         path: google.maps.SymbolPath.CIRCLE,
         scale: 20,
-        fillColor: "yellow",
+        fillColor: "red",
         fillOpacity: 1,
         strokeWeight: 1,
         strokeColor: "black",
       });
+      document.getElementById("distance").value = String(distance);
+      document.getElementById("origin").value = String(startNode.label);
+      document.getElementById("destination").value = String(endNode.label);
+      update();
     });
   });
 

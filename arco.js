@@ -25,6 +25,10 @@ class arco{
     );
     this.weight = distance.toFixed(2);
   }
+
+  changeColorPoly(color){
+    this.poly.setOptions({strokeColor: color});
+  }
 }
 
 

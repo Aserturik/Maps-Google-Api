@@ -1,19 +1,16 @@
 import Nodo from "./nodo.js";
 import Arco from "./arco.js";
-//import PriorityQueue from "js-priority-queue"; 
+import Graph from "./graph.js";
 // Usa la biblioteca PriorityQueue en tu código
 
 const arcs = [];
 const nodes = [];
-const Graph = {
-  nodes,
-  arcs,
-};
 
 let startNode = null;
 let endNode = null;
 let distance = 0;
 const shortestRoute = [];
+const graph = new Graph();
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -60,6 +57,8 @@ function initMap() {
   nodes.forEach((node) => {
     node.setArcs(arcs);
   });
+
+  arcs[0].changeColorPoly("blue");
 
   nodes.forEach((node) => {
     google.maps.event.addListener(node.Marker, "position_changed", update);
@@ -115,6 +114,15 @@ function initMap() {
       update(); // Call update() after selecting endNode
 
       if (startNode && endNode) {
+
+        for (const arc of arcs) {
+          arc.changeColorPoly("red");
+        }
+
+        const shareArc = getSharedArc(startNode, endNode);
+        shareArc.changeColorPoly("yellow");
+
+
         const result = dijkstra(startNode, endNode);
         console.log(result);
         // distance = result.distance;
@@ -124,6 +132,17 @@ function initMap() {
       }
     });
   });
+}
+function getSharedArc(nodeA, nodeB) {
+  for (const arc of arcs) {
+    if (
+      (arc.nodoA === nodeA && arc.nodoB === nodeB) ||
+      (arc.nodoA === nodeB && arc.nodoB === nodeA)
+    ) {
+      return arc;
+    }
+  }
+  return null;
 }
 
 // Calculate distance between nodes and update polyline weight
@@ -141,7 +160,11 @@ const update = () => {
 };
 
 function dijkstra(startNode, endNode) {
-  
+  const result = graph.dijkstra(startNode, endNode);
+  distance = result.distance;
+  shortestRoute = result.shortestRoute;
+  console.log(shortestRoute);
+  console.log(distance);
 }
 
 
